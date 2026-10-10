@@ -12,19 +12,19 @@ In an age of endless digital scrolling and increasingly isolated lives, **Lectur
 
 What started as a quiet experiment is now evolving. The magic of these gatherings belongs to everyone. The movement is growing, and we can't—and shouldn't—control it centrally. 
 
-## 🌿 Start a Chapter: Fork the Movement
+## 🌿 Start a Chapter: Claim Your City
 
 We are officially opening the doors for anyone, anywhere in the world, to start their own chapter of **Lectures in Place**. 
 
-If you have a space (a living room, a rooftop, a garage) and a desire to curate conversations that matter, you are one of us. 
+If you have a space (a living room, a rooftop, a garage) and a desire to curate conversations that matter, you are one of us. We use a **Hub-and-Spoke** architecture to keep the movement decentralized but connected: you get your own branch and local UI, but we share a global event nervous system.
 
-### How to run your own chapter:
-1. **Fork this repository** (or branch it if you're a core collaborator).
-2. **Deploy your own instance** of the application (it's built to be instantly hostable).
-3. **Add your events.** The platform handles the RSVPs, the secret locations, and the ticket logic.
-4. **Gather your people.**
+### How to claim a chapter:
+1. **Find your city's branch.** We have pre-created branches for top intellectual hubs (e.g., `chapter/boston-mit`, `chapter/stockholm`, `chapter/london`).
+2. **Request Access.** Contact the core organizers to claim your branch. We will assign you restricted Supabase API keys so your local app can securely read/write events exclusively for your city.
+3. **Customize your frontend.** Checkout your branch, customize the local language and culture in your UI, and deploy it.
+4. **Host your event.** When you create an event, it automatically federates to the global map on the main site.
 
-Eventually, we will federate these chapters so that a global map of underground intellectual gatherings emerges. For now, fork the code, invite your friends, and start talking.
+By claiming a branch, you own your local instance without accidentally altering the `main` global build.
 
 ---
 
