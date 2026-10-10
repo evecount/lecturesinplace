@@ -1,0 +1,55 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1791640273900,
+      "tag": "0000_create_salon_intakes",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1791640376934,
+      "tag": "0001_protect_intake_submission",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1791643375276,
+      "tag": "0002_create_telegram_links",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1791643431012,
+      "tag": "0003_add_intake_contact",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1791643880571,
+      "tag": "0004_widen_intake_topics_for_mathematics",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1791643906430,
+      "tag": "0005_add_consciousness_to_intake_topics",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1791644997665,
+      "tag": "0006_add_paired_entry",
+      "breakpoints": true
+    }
+  ]
+}
