@@ -35,18 +35,26 @@ export function IntakeForm({ kind = 'ballot' }: { kind?: 'ballot' | 'host' | 'ta
     setError('');
     setPending(true);
     try {
+      const kindMap: Record<'ballot' | 'host' | 'talk', string> = {
+        ballot: 'I want to attend / join the ballot',
+        host: 'I have a venue / unexpected place',
+        talk: 'I want to give a lecture',
+      };
       const payload = new URLSearchParams();
       payload.append('entry.320523024', parsed.data.name);
       payload.append('entry.1362518333', parsed.data.email);
-      payload.append('entry.1204105173', parsed.data.contact);
-      payload.append('entry.102626825', parsed.data.partnerEmail);
-      for (const topic of parsed.data.topics) {
+      payload.append('entry.1446279015', parsed.data.contact.trim() || parsed.data.email);
+      payload.append('entry.2133280250', kindMap[parsed.data.kind]);
+      const chosenTopics = parsed.data.topics.length ? parsed.data.topics : [topics[0]];
+      for (const topic of chosenTopics) {
         payload.append('entry.352574748', `${topic} — ${topicNotes[topic]}`);
       }
-      const detailsVal = parsed.data.details
-        ? `[${parsed.data.kind}] ${parsed.data.details}`
-        : `[${parsed.data.kind}]`;
-      payload.append('entry.310010463', detailsVal);
+      if (parsed.data.details) {
+        payload.append('entry.310010463', parsed.data.details);
+      }
+      if (parsed.data.partnerEmail) {
+        payload.append('entry.1871097691', `Partner: ${parsed.data.partnerEmail}`);
+      }
       await fetch(GOOGLE_FORM_URL, {
         method: 'POST',
         mode: 'no-cors',
