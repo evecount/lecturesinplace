@@ -5,11 +5,14 @@ import { intakeSchema, topics, topicNotes } from '@/lib/intake-schema';
 
 const GOOGLE_FORM_URL =
   'https://docs.google.com/forms/d/e/1FAIpQLScPKrGavytgGNIQTEWRYt0D2WpGSZsqxRg0N3aaOcx5oXrOgQ/formResponse';
+const STRIPE_STANDARD_URL = 'https://buy.stripe.com/8x2cN6d5jeC44tM15OefC00';
+const STRIPE_PWYC_URL = 'https://buy.stripe.com/5kQcN62qFgKc1hAbtoefC01';
 
 export function IntakeForm({ kind = 'ballot' }: { kind?: 'ballot' | 'host' | 'talk' }) {
   const [error, setError] = useState('');
   const [pending, setPending] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [submittedEmail, setSubmittedEmail] = useState('');
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -61,6 +64,7 @@ export function IntakeForm({ kind = 'ballot' }: { kind?: 'ballot' | 'host' | 'ta
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: payload.toString(),
       });
+      setSubmittedEmail(parsed.data.email);
       setSuccess(true);
     } catch {
       setError('Your entry could not be saved. Please try again.');
@@ -88,6 +92,26 @@ export function IntakeForm({ kind = 'ballot' }: { kind?: 'ballot' | 'host' | 'ta
               </a>{' '}
               with your ballot email and the reminders find you there instead.
             </p>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <Button variant="ballot" asChild>
+                <a
+                  href={`${STRIPE_STANDARD_URL}${submittedEmail ? `?prefilled_email=${encodeURIComponent(submittedEmail)}` : ''}`}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Reserve seat — $24 (1 Pax + Plus-One) <ArrowRight />
+                </a>
+              </Button>
+              <Button variant="editorial" asChild>
+                <a
+                  href={`${STRIPE_PWYC_URL}${submittedEmail ? `?prefilled_email=${encodeURIComponent(submittedEmail)}` : ''}`}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  PWYC — $12 suggested (1 Person) <ArrowRight />
+                </a>
+              </Button>
+            </div>
             <div className="mt-6 p-5 rounded-xl border border-border bg-card/80 flex flex-col sm:flex-row items-center gap-5">
               <img
                 src="/paynow-qr.jpg"

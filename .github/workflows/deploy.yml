@@ -33,7 +33,7 @@ jobs:
         run: |
           bun run build
           if [ ! -f .output/public/index.html ] && [ -f .output/public/_shell.html ]; then cp .output/public/_shell.html .output/public/index.html; fi
-          if [ -f .output/public/index.html ]; then cp .output/public/index.html .output/public/404.html; fi
+          if [ -f .output/public/index.html ]; then cp .output/public/index.html .output/public/404.html; mkdir -p .output/public/confirmation && cp .output/public/index.html .output/public/confirmation/index.html; fi
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
