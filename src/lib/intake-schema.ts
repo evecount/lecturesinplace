@@ -10,9 +10,9 @@ export const topicNotes: Record<(typeof topics)[number], string> = {
   'History of Science': 'How we came to know what we know — and what we got wrong.',
   Mathematics: 'Pattern, proof, and the quiet pleasure of a thing being true.',
   'Consciousness & Mind': 'The hard problem: how grey matter becomes the feeling of being you.',
-  Robotics: 'Embodied machines, actuators, and intelligence meeting the physical world.',
-  Quantum: 'Entanglement, computation, and what happens below the classical threshold.',
-  Space: 'Orbits, propulsion, and what it takes to live and compute off-world.',
+  Robotics: 'Machines that move, sense, and act in the real world, and what they change when they do.',
+  Quantum: 'The strange rules underneath reality, and what they let us compute, sense, and secure.',
+  Space: 'What is out there, how we get there, and what it changes about being here.',
 };
 export const intakeSchema = z.object({
   kind: z.enum(['ballot', 'host', 'talk']),
