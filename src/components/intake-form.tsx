@@ -102,7 +102,7 @@ export function IntakeForm({ kind = 'ballot' }: { kind?: 'ballot' | 'host' | 'ta
                   PayNow to <span className="mono">+65 8608 1377</span>
                 </p>
                 <p className="text-xs text-muted-foreground leading-relaxed">
-                  <strong>$25</strong> for 1 pax + automatic plus-one, or <strong>PWYC</strong> (suggested <strong>$12</strong> for 1 person). <strong>Important:</strong> Write the <strong>event date and your email</strong> in the PayNow comments/reference so we can confirm your ticket, send the secret location on WhatsApp, and process refunds if needed.
+                  <strong>$24</strong> for 1 pax + automatic plus-one, or <strong>PWYC</strong> (suggested <strong>$12</strong> for 1 person). <strong>Important:</strong> Write the <strong>event date and your email</strong> in the PayNow comments/reference so we can confirm your ticket, send the secret location on WhatsApp, and process refunds if needed.
                 </p>
               </div>
             </div>
