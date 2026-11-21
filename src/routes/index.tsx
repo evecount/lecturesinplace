@@ -4,9 +4,7 @@ import { ArrowRight, ArrowUpRight, Clock3, FileX2, EyeOff } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { IntakeForm } from '@/components/intake-form';
-import { PaymentTestModeBanner } from '@/components/PaymentTestModeBanner';
 import salonImage from '@/assets/salon-room-lines.png';
-import brandMark from '@/assets/lectures-mark.png.asset.json';
 export const Route = createFileRoute("/")({
   head: () => ({ meta: [
     { title: 'Lectures in Place — Dense ideas. Unusual rooms.' },
@@ -21,9 +19,8 @@ export const Route = createFileRoute("/")({
 function Index() {
   const [proposal, setProposal] = useState<'host' | 'talk' | null>(null);
   return <>
-    <PaymentTestModeBanner />
     <div className="page-width">
-    <header className="site-nav"><a href="#" className="brand" aria-label="Lectures in Place home"><img className="brand-logo" src={brandMark.url} alt="" width={52} height={52} /><span>lectures in place</span></a><div className="flex items-center gap-9"><span className="eyebrow nav-city text-muted-foreground">Singapore / 2nd Thursday / Undisclosed</span><Button variant="editorial" asChild><a href="#ballot">Enter the ballot <ArrowUpRight /></a></Button></div></header>
+    <header className="site-nav"><a href="#" className="brand" aria-label="Lectures in Place home"><img className="brand-logo rounded-full" src="/lectures-mark.png" alt="Lectures in Place" width={52} height={52} /><span>lectures in place</span></a><div className="flex items-center gap-9"><span className="eyebrow nav-city text-muted-foreground">Singapore / 2nd Thursday / Undisclosed</span><Button variant="editorial" asChild><a href="#ballot">Enter the ballot <ArrowUpRight /></a></Button></div></header>
     <main>
       <section className="hero">
         <img src={salonImage} className="hero-image" alt="Charcoal and coral line illustration of a room full of people listening to a standing speaker" width={1264} height={848} fetchPriority="high" />
