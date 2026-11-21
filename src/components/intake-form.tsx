@@ -102,7 +102,7 @@ export function IntakeForm({ kind = 'ballot' }: { kind?: 'ballot' | 'host' | 'ta
                   PayNow to <span className="mono">+65 8608 1377</span>
                 </p>
                 <p className="text-xs text-muted-foreground leading-relaxed">
-                  <strong>$24</strong> for 1 pax + automatic plus-one, or <strong>PWYC</strong> (suggested <strong>$12</strong> for 1 person). <strong>Important:</strong> Write the <strong>event date and your email</strong> in the PayNow comments/reference so we can confirm your ticket, send the secret location on WhatsApp, and process refunds if needed.
+                  <strong>$24</strong> for 1 pax + automatic plus-one, or <strong>PWYC</strong> (suggested <strong>$12</strong>, 1 person only, no plus-one). Enter the amount in your bank app, write the <strong>event date &amp; your email</strong> in the comments, and send your <strong>name, email, phone, and payment screenshot</strong> to <a className="underline text-foreground" href="mailto:gwen@evecount.com">gwen@evecount.com</a> or WhatsApp <strong>+65 8608 1377</strong> so we can send the secret location 24h before. <em>No refunds 5 working days before the event.</em>
                 </p>
               </div>
             </div>
