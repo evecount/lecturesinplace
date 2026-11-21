@@ -80,13 +80,33 @@ export function IntakeForm({ kind = 'ballot' }: { kind?: 'ballot' | 'host' | 'ta
             : "We'll be in touch if it's a fit for the salon."}
         </p>
         {kind === 'ballot' && (
-          <p className="text-sm text-muted-foreground leading-relaxed mt-4">
-            Prefer the ping on Telegram? Message{' '}
-            <a className="underline underline-offset-4 text-foreground" href="https://t.me/Lecturesinplace_bot" target="_blank" rel="noreferrer">
-              @Lecturesinplace_bot
-            </a>{' '}
-            with your ballot email and the reminders find you there instead.
-          </p>
+          <>
+            <p className="text-sm text-muted-foreground leading-relaxed mt-4">
+              Prefer the ping on Telegram? Message{' '}
+              <a className="underline underline-offset-4 text-foreground" href="https://t.me/Lecturesinplace_bot" target="_blank" rel="noreferrer">
+                @Lecturesinplace_bot
+              </a>{' '}
+              with your ballot email and the reminders find you there instead.
+            </p>
+            <div className="mt-6 p-5 rounded-xl border border-border bg-card/80 flex flex-col sm:flex-row items-center gap-5">
+              <img
+                src="/paynow-qr.jpg"
+                alt="PayNow QR code for Lectures in Place (+65 8608 1377)"
+                width={132}
+                height={132}
+                className="rounded-lg border border-border bg-white p-1 shrink-0"
+              />
+              <div className="text-left space-y-1.5">
+                <p className="eyebrow text-primary">PayNow (Singapore)</p>
+                <p className="text-sm font-semibold text-foreground">
+                  PayNow to <span className="mono">+65 8608 1377</span>
+                </p>
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  <strong>$25</strong> for 1 pax + automatic plus-one, or <strong>PWYC</strong> (suggested <strong>$12</strong> for 1 person). Include your ballot email in the reference so we can match your seat.
+                </p>
+              </div>
+            </div>
+          </>
         )}
       </div>
     );
