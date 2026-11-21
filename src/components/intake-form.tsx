@@ -92,7 +92,10 @@ export function IntakeForm({ kind = 'ballot' }: { kind?: 'ballot' | 'host' | 'ta
               </a>{' '}
               with your ballot email and the reminders find you there instead.
             </p>
-            <div className="mt-6 flex flex-wrap gap-3">
+            <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground mt-6">
+              For 2027 paid editions (Thu 10 Dec is free):
+            </p>
+            <div className="mt-3 flex flex-wrap gap-3">
               <Button variant="ballot" asChild>
                 <a
                   href={`${STRIPE_STANDARD_URL}${submittedEmail ? `?prefilled_email=${encodeURIComponent(submittedEmail)}` : ''}`}
