@@ -1,33 +1,83 @@
 import { useState, type FormEvent } from 'react';
-import { useServerFn } from '@tanstack/react-start';
 import { ArrowRight, Check } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { intakeSchema, topics, topicNotes } from '@/lib/intake-schema';
-import { submitIntake } from '@/lib/intake.functions';
-import { useStripeCheckout } from '@/hooks/useStripeCheckout';
+
+const GOOGLE_FORM_URL =
+  'https://docs.google.com/forms/d/e/1FAIpQLScPKrGavytgGNIQTEWRYt0D2WpGSZsqxRg0N3aaOcx5oXrOgQ/formResponse';
 
 export function IntakeForm({ kind = 'ballot' }: { kind?: 'ballot' | 'host' | 'talk' }) {
   const [error, setError] = useState('');
   const [pending, setPending] = useState(false);
   const [success, setSuccess] = useState(false);
-  const [email, setEmail] = useState('');
-  const submit = useServerFn(submitIntake);
-  const { openCheckout, isOpen, checkoutElement } = useStripeCheckout();
+
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const form = new FormData(event.currentTarget);
-    const parsed = intakeSchema.safeParse({ kind, name: form.get('name'), email: form.get('email'), topics: form.getAll('topics'), details: form.get('details') ?? '', contact: form.get('contact') ?? '', partnerEmail: form.get('partnerEmail') ?? '', website: form.get('website') ?? '' });
-    if (!parsed.success) { setError(parsed.error.issues[0]?.message ?? 'Check your details.'); return; }
-    setError(''); setPending(true);
-    try { await submit({ data: parsed.data }); setEmail(parsed.data.email); setSuccess(true); }
-    catch { setError('Your entry could not be saved. Please try again.'); }
-    finally { setPending(false); }
+    const parsed = intakeSchema.safeParse({
+      kind,
+      name: form.get('name'),
+      email: form.get('email'),
+      topics: form.getAll('topics'),
+      details: form.get('details') ?? '',
+      contact: form.get('contact') ?? '',
+      partnerEmail: form.get('partnerEmail') ?? '',
+      website: form.get('website') ?? '',
+    });
+    if (!parsed.success) {
+      setError(parsed.error.issues[0]?.message ?? 'Check your details.');
+      return;
+    }
+    if (parsed.data.website.trim()) {
+      setSuccess(true);
+      return;
+    }
+    setError('');
+    setPending(true);
+    try {
+      const payload = new URLSearchParams();
+      payload.append('entry.491281743', parsed.data.kind);
+      payload.append('entry.320523024', parsed.data.name);
+      payload.append('entry.1362518333', parsed.data.email);
+      payload.append('entry.1204105173', parsed.data.contact);
+      payload.append('entry.102626825', parsed.data.partnerEmail);
+      payload.append('entry.352574748', parsed.data.topics.join(', '));
+      payload.append('entry.310010463', parsed.data.details);
+      await fetch(GOOGLE_FORM_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: payload.toString(),
+      });
+      setSuccess(true);
+    } catch {
+      setError('Your entry could not be saved. Please try again.');
+    } finally {
+      setPending(false);
+    }
   }
-  if (success) return <div className="form-success" role="status"><Check className="text-primary mb-5" /><h3 className="text-2xl mb-3">{kind === 'ballot' ? "You're in the ballot." : 'Proposal received.'}</h3><p className="text-sm text-muted-foreground leading-relaxed">{kind === 'ballot' ? 'If your name is drawn, the coordinates will arrive in your inbox 24 hours before doors open.' : "We'll be in touch if it's a fit for the salon."}</p>
-    {kind === 'ballot' && <p className="text-sm text-muted-foreground leading-relaxed mt-4">Prefer the ping on Telegram? Message <a className="underline underline-offset-4 text-foreground" href="https://t.me/Lecturesinplace_bot" target="_blank" rel="noreferrer">@Lecturesinplace_bot</a> with your ballot email and the reminders find you there instead.</p>}
-    {kind === 'ballot' && !isOpen && <Button variant="editorial" className="mt-7" onClick={() => openCheckout({ priceId: 'salon_seat_v2_sgd', customerEmail: email, returnUrl: `${window.location.origin}/checkout/return?session_id={CHECKOUT_SESSION_ID}` })}>Reserve a seat — $25 incl. one drink <ArrowRight /></Button>}
-    {kind === 'ballot' && checkoutElement}
-  </div>;
+
+  if (success)
+    return (
+      <div className="form-success" role="status">
+        <Check className="text-primary mb-5" />
+        <h3 className="text-2xl mb-3">{kind === 'ballot' ? "You're in the ballot." : 'Proposal received.'}</h3>
+        <p className="text-sm text-muted-foreground leading-relaxed">
+          {kind === 'ballot'
+            ? 'If your name is drawn, the coordinates will arrive in your inbox 24 hours before doors open.'
+            : "We'll be in touch if it's a fit for the salon."}
+        </p>
+        {kind === 'ballot' && (
+          <p className="text-sm text-muted-foreground leading-relaxed mt-4">
+            Prefer the ping on Telegram? Message{' '}
+            <a className="underline underline-offset-4 text-foreground" href="https://t.me/Lecturesinplace_bot" target="_blank" rel="noreferrer">
+              @Lecturesinplace_bot
+            </a>{' '}
+            with your ballot email and the reminders find you there instead.
+          </p>
+        )}
+      </div>
+    );
   return <form className="intake-form" onSubmit={onSubmit} noValidate>
     <div className="field-pair"><label><span className="field-label">Name</span><input className="text-field" name="name" placeholder="Your name" autoComplete="name" required maxLength={100} /></label><label><span className="field-label">Email</span><input className="text-field" name="email" type="email" placeholder="you@somewhere.com" autoComplete="email" required maxLength={255} /></label></div>
     <label className="hidden" aria-hidden="true">Website<input name="website" tabIndex={-1} autoComplete="off" /></label>
