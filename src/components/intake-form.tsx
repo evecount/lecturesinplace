@@ -36,13 +36,17 @@ export function IntakeForm({ kind = 'ballot' }: { kind?: 'ballot' | 'host' | 'ta
     setPending(true);
     try {
       const payload = new URLSearchParams();
-      payload.append('entry.491281743', parsed.data.kind);
       payload.append('entry.320523024', parsed.data.name);
       payload.append('entry.1362518333', parsed.data.email);
       payload.append('entry.1204105173', parsed.data.contact);
       payload.append('entry.102626825', parsed.data.partnerEmail);
-      payload.append('entry.352574748', parsed.data.topics.join(', '));
-      payload.append('entry.310010463', parsed.data.details);
+      for (const topic of parsed.data.topics) {
+        payload.append('entry.352574748', `${topic} — ${topicNotes[topic]}`);
+      }
+      const detailsVal = parsed.data.details
+        ? `[${parsed.data.kind}] ${parsed.data.details}`
+        : `[${parsed.data.kind}]`;
+      payload.append('entry.310010463', detailsVal);
       await fetch(GOOGLE_FORM_URL, {
         method: 'POST',
         mode: 'no-cors',
