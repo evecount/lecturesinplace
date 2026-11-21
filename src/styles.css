@@ -155,7 +155,7 @@ html { scroll-behavior: smooth; scroll-padding-top: 35px; }
 .eyebrow { font-family: 'IBM Plex Mono', monospace; font-size: 10px; text-transform: uppercase; line-height: 1.8; }
 .site-nav { min-height: 91px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); }
 .brand { font-family: var(--font-humanist); font-size: 20px; font-weight: 500; display: flex; align-items: center; gap: 9px; }
-.brand-logo { width: 52px; height: 52px; object-fit: contain; filter: invert(1); mix-blend-mode: multiply; }
+.brand-logo { width: 52px; height: 52px; object-fit: contain; }
 .hero { position: relative; isolation: isolate; min-height: 572px; display: flex; align-items: center; border-bottom: 1px solid var(--border); }
 .hero-image { position: absolute; z-index: -2; inset: 0; width: 100%; height: 100%; object-fit: contain; object-position: right center; mix-blend-mode: multiply; }
 .hero-content { padding: 58px 0 65px; }
