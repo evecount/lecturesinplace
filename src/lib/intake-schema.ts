@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-export const topics = ['Frontier AI', 'Systems', 'Media', 'Urban Geography', 'Design & Architecture', 'History of Science', 'Mathematics', 'Consciousness & Mind', 'Robotics', 'Quantum'] as const;
+export const topics = ['Frontier AI', 'Systems', 'Media', 'Urban Geography', 'Design & Architecture', 'History of Science', 'Mathematics', 'Consciousness & Mind', 'Robotics', 'Quantum', 'Space'] as const;
 export const topicNotes: Record<(typeof topics)[number], string> = {
   'Frontier AI': 'Where machine intelligence is heading — and what it unsettles on the way.',
   Systems: 'The invisible machinery: infrastructure, institutions, feedback loops.',
@@ -12,6 +12,7 @@ export const topicNotes: Record<(typeof topics)[number], string> = {
   'Consciousness & Mind': 'The hard problem: how grey matter becomes the feeling of being you.',
   Robotics: 'Embodied machines, actuators, and intelligence meeting the physical world.',
   Quantum: 'Entanglement, computation, and what happens below the classical threshold.',
+  Space: 'Orbits, propulsion, and what it takes to live and compute off-world.',
 };
 export const intakeSchema = z.object({
   kind: z.enum(['ballot', 'host', 'talk']),
