@@ -47,7 +47,7 @@ function Index() {
       </div>
       <div className="venue-strip" aria-label="Spaces we scout across Singapore">
         <div className="venue-tile"><figure><img src="/venues/04-ferry-deck.png" alt="Illustration of a ferry deck" loading="lazy" /><figcaption>Ferry deck</figcaption></figure></div>
-        <div className="venue-tile"><figure><img src="/venues/15-temple-courtyard.png" alt="Illustration of a quiet temple courtyard" loading="lazy" /><figcaption>Temple courtyard</figcaption></figure></div>
+        <div className="venue-tile"><figure><img src="/venues/11-old-cinema.png" alt="Illustration of an old cinema" loading="lazy" /><figcaption>Old cinema</figcaption></figure></div>
         <div className="venue-tile"><figure><img src="/venues/19-skybridge.png" alt="Illustration of a skybridge" loading="lazy" /><figcaption>Skybridge</figcaption></figure></div>
         <div className="venue-tile"><figure><img src="/venues/24-mangrove.png" alt="Illustration of a mangrove boardwalk" loading="lazy" /><figcaption>Mangrove</figcaption></figure></div>
       </div></section>
