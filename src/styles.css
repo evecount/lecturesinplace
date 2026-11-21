@@ -254,3 +254,16 @@ html { scroll-behavior: smooth; scroll-padding-top: 35px; }
 .easter-egg summary::before { content: "?"; display: inline-grid; place-items: center; width: 14px; height: 14px; border: 1px solid currentColor; border-radius: 50%; font-size: 9px; }
 .easter-egg summary:hover, .easter-egg[open] summary { opacity: 1; color: var(--primary); }
 .easter-egg p { margin-top: 12px; font-size: 12px; line-height: 1.7; color: var(--muted-foreground); max-width: 46ch; }
+
+/* venue illustrations */
+.room-art { aspect-ratio: 4 / 3; overflow: hidden; border: 1px solid var(--border); background: var(--card); margin-bottom: 16px; }
+.room-art img { width: 100%; height: 100%; object-fit: cover; mix-blend-mode: multiply; display: block; }
+.room-link { display: inline-flex; align-items: center; gap: 6px; margin-top: 12px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--primary); }
+.room-link:hover { text-decoration: underline; }
+.venue-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-top: 32px; padding-top: 28px; border-top: 1px solid var(--border); }
+.venue-tile figure { margin: 0; }
+.venue-tile img { aspect-ratio: 4 / 3; width: 100%; object-fit: cover; mix-blend-mode: multiply; border: 1px solid var(--border); background: var(--card); display: block; }
+.venue-tile figcaption { margin-top: 8px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted-foreground); }
+@media (max-width: 1000px) {
+  .venue-strip { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+}
