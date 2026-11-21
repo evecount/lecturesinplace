@@ -5,7 +5,7 @@ import { intakeSchema, topics, topicNotes } from '@/lib/intake-schema';
 
 const GOOGLE_FORM_URL =
   'https://docs.google.com/forms/d/e/1FAIpQLScPKrGavytgGNIQTEWRYt0D2WpGSZsqxRg0N3aaOcx5oXrOgQ/formResponse';
-const STRIPE_STANDARD_URL = 'https://buy.stripe.com/8x2cN6d5jeC44tM15OefC00';
+const STRIPE_STANDARD_URL = 'https://buy.stripe.com/8x2cN6d5jeC44tM1SOefC00';
 const STRIPE_PWYC_URL = 'https://buy.stripe.com/5kQcN62qFgKc1hAbtoefC01';
 
 export function IntakeForm({ kind = 'ballot' }: { kind?: 'ballot' | 'host' | 'talk' }) {
