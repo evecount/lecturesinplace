@@ -9,7 +9,7 @@ const STRIPE_STANDARD_URL = 'https://buy.stripe.com/8x2cN6d5jeC44tM1SOefC00';
 const STRIPE_PWYC_URL = 'https://buy.stripe.com/5kQcN62qFgKc1hAbtoefC01';
 const STRIPE_FREE_URL = 'https://buy.stripe.com/5kQ28s5CRgKc9O6550efC03';
 
-export function IntakeForm({ kind = 'ballot' }: { kind?: 'ballot' | 'host' | 'talk' }) {
+export function IntakeForm({ kind = 'ballot' }: { kind?: 'ballot' | 'host' | 'talk' | 'team' }) {
   const [error, setError] = useState('');
   const [pending, setPending] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -39,10 +39,11 @@ export function IntakeForm({ kind = 'ballot' }: { kind?: 'ballot' | 'host' | 'ta
     setError('');
     setPending(true);
     try {
-      const kindMap: Record<'ballot' | 'host' | 'talk', string> = {
+      const kindMap: Record<'ballot' | 'host' | 'talk' | 'team', string> = {
         ballot: 'I want to attend / join the ballot',
         host: 'I have a venue / unexpected place',
         talk: 'I want to give a lecture',
+        team: 'I have a venue / unexpected place',
       };
       const payload = new URLSearchParams();
       payload.append('entry.320523024', parsed.data.name);
@@ -54,7 +55,7 @@ export function IntakeForm({ kind = 'ballot' }: { kind?: 'ballot' | 'host' | 'ta
         payload.append('entry.352574748', `${topic} — ${topicNotes[topic]}`);
       }
       if (parsed.data.details) {
-        payload.append('entry.310010463', parsed.data.details);
+        payload.append('entry.310010463', parsed.data.kind === 'team' ? `[Team / Sponsor] ${parsed.data.details}` : parsed.data.details);
       }
       if (parsed.data.partnerEmail) {
         payload.append('entry.1871097691', `Plus-one: ${parsed.data.partnerEmail}`);
@@ -152,7 +153,7 @@ export function IntakeForm({ kind = 'ballot' }: { kind?: 'ballot' | 'host' | 'ta
     <label className="hidden" aria-hidden="true">Website<input name="website" tabIndex={-1} autoComplete="off" /></label>
     {kind === 'ballot' && <label><span className="field-label">Backup contact <span className="text-muted-foreground">/ optional — LinkedIn or WhatsApp</span></span><input className="text-field" name="contact" placeholder="linkedin.com/in/you or +65…" maxLength={255} /><span className="field-hint">The coordinates are secret and arrive 24 hours before doors. If your inbox fails us, this is how they still reach you. Never shared, never published.</span></label>}
     {kind === 'ballot' && <label><span className="field-label">Bringing a plus-one? <span className="text-muted-foreground">/ optional — their email (included free)</span></span><input className="text-field" name="partnerEmail" type="email" placeholder="they@somewhere.com" maxLength={255} /><span className="field-hint">Every paid ticket is for 1 pax and automatically includes a plus-one — instant date night or bring a curious friend. Leave their email if you want them on the coordinates drop too.</span></label>}
-    {kind === 'ballot' ? <fieldset><legend className="field-label">Areas of curiosity <span className="text-muted-foreground">/ choose any</span></legend><div className="topic-grid">{topics.map(topic => <label className="topic-option" key={topic}><input type="checkbox" name="topics" value={topic} />{topic}<span className="topic-help" tabIndex={0} aria-label={`${topic}: ${topicNotes[topic]}`} onClick={e => e.preventDefault()}><span className="topic-help-mark" aria-hidden="true">?</span><span className="topic-help-tip" role="tooltip">{topicNotes[topic]}</span></span></label>)}</div></fieldset> : <label><span className="field-label">{kind === 'host' ? 'Your space in Singapore' : 'Your thesis'}</span><textarea name="details" className="text-field" rows={5} maxLength={2000} required placeholder={kind === 'host' ? 'The space, the neighbourhood, and what makes it unusual.' : "The idea you can't stop thinking about. Why does it matter?"} /></label>}
+    {kind === 'ballot' ? <fieldset><legend className="field-label">Areas of curiosity <span className="text-muted-foreground">/ choose any</span></legend><div className="topic-grid">{topics.map(topic => <label className="topic-option" key={topic}><input type="checkbox" name="topics" value={topic} />{topic}<span className="topic-help" tabIndex={0} aria-label={`${topic}: ${topicNotes[topic]}`} onClick={e => e.preventDefault()}><span className="topic-help-mark" aria-hidden="true">?</span><span className="topic-help-tip" role="tooltip">{topicNotes[topic]}</span></span></label>)}</div></fieldset> : <label><span className="field-label">{kind === 'host' ? 'Your space in Singapore' : kind === 'team' ? 'Role or sponsorship' : 'Your thesis'}</span><textarea name="details" className="text-field" rows={5} maxLength={2000} required placeholder={kind === 'host' ? 'The space, the neighbourhood, and what makes it unusual.' : kind === 'team' ? 'Room Steward, Pour & Hospitality, Archivist — or backing a room pour / speaker honorarium.' : "The idea you can't stop thinking about. Why does it matter?"} /></label>}
     {error && <p className="form-error" role="alert">{error}</p>}
     <Button variant="ballot" type="submit" disabled={pending}>{pending ? 'Submitting…' : kind === 'ballot' ? 'Save your seat' : 'Send proposal'}<ArrowRight /></Button>
     <p className="privacy-note">{kind === 'ballot' ? 'A booking, first come first served. 25 seats only. Please cancel if you cannot come.' : 'Your details stay private. We only use them to respond to your proposal.'}</p>

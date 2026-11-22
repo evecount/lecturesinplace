@@ -15,7 +15,7 @@ export const topicNotes: Record<(typeof topics)[number], string> = {
   Space: 'What is out there, how we get there, and what it changes about being here.',
 };
 export const intakeSchema = z.object({
-  kind: z.enum(['ballot', 'host', 'talk']),
+  kind: z.enum(['ballot', 'host', 'talk', 'team']),
   name: z.string().trim().min(1, 'Your name is required.').max(100),
   email: z.string().trim().toLowerCase().email('Enter a valid email address.').max(255),
   topics: z.array(z.enum(topics)).max(4),
