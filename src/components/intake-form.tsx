@@ -7,6 +7,7 @@ const GOOGLE_FORM_URL =
   'https://docs.google.com/forms/d/e/1FAIpQLScPKrGavytgGNIQTEWRYt0D2WpGSZsqxRg0N3aaOcx5oXrOgQ/formResponse';
 const STRIPE_STANDARD_URL = 'https://buy.stripe.com/8x2cN6d5jeC44tM1SOefC00';
 const STRIPE_PWYC_URL = 'https://buy.stripe.com/5kQcN62qFgKc1hAbtoefC01';
+const STRIPE_FREE_URL = 'https://buy.stripe.com/5kQ28s5CRgKc9O6550efC03';
 
 export function IntakeForm({ kind = 'ballot' }: { kind?: 'ballot' | 'host' | 'talk' }) {
   const [error, setError] = useState('');
@@ -77,10 +78,10 @@ export function IntakeForm({ kind = 'ballot' }: { kind?: 'ballot' | 'host' | 'ta
     return (
       <div className="form-success" role="status">
         <Check className="text-primary mb-5" />
-        <h3 className="text-2xl mb-3">{kind === 'ballot' ? "You're in the ballot." : 'Proposal received.'}</h3>
+        <h3 className="text-2xl mb-3">{kind === 'ballot' ? "You're registered." : 'Proposal received.'}</h3>
         <p className="text-sm text-muted-foreground leading-relaxed">
           {kind === 'ballot'
-            ? 'If your name is drawn, the coordinates will arrive in your inbox 24 hours before doors open.'
+            ? 'Once you register, the secret coordinates will arrive in your inbox 24 hours before doors open. Please only keep your seat if you plan to come.'
             : "We'll be in touch if it's a fit for the salon."}
         </p>
         {kind === 'ballot' && (
@@ -90,19 +91,28 @@ export function IntakeForm({ kind = 'ballot' }: { kind?: 'ballot' | 'host' | 'ta
               <a className="underline underline-offset-4 text-foreground" href="https://t.me/Lecturesinplace_bot" target="_blank" rel="noreferrer">
                 @Lecturesinplace_bot
               </a>{' '}
-              with your ballot email and the reminders find you there instead.
+              with your registration email and the reminders find you there instead.
             </p>
             <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground mt-6">
-              For 2027 paid editions (Thu 10 Dec is free):
+              Claim your ticket (first come, first served):
             </p>
             <div className="mt-3 flex flex-wrap gap-3">
+              <Button variant="ballot" asChild>
+                <a
+                  href={`${STRIPE_FREE_URL}${submittedEmail ? `?prefilled_email=${encodeURIComponent(submittedEmail)}` : ''}`}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Thu 10 Dec (Free) — 1 Pax + Plus-One <ArrowRight />
+                </a>
+              </Button>
               <Button variant="ballot" asChild>
                 <a
                   href={`${STRIPE_STANDARD_URL}${submittedEmail ? `?prefilled_email=${encodeURIComponent(submittedEmail)}` : ''}`}
                   target="_blank"
                   rel="noreferrer"
                 >
-                  Reserve seat — $24 (1 Pax + Plus-One) <ArrowRight />
+                  2027 Standard — $24 (1 Pax + Plus-One) <ArrowRight />
                 </a>
               </Button>
               <Button variant="editorial" asChild>
@@ -111,7 +121,7 @@ export function IntakeForm({ kind = 'ballot' }: { kind?: 'ballot' | 'host' | 'ta
                   target="_blank"
                   rel="noreferrer"
                 >
-                  PWYC — $12 suggested (1 Person) <ArrowRight />
+                  2027 PWYC — $12 suggested (1 Person) <ArrowRight />
                 </a>
               </Button>
             </div>
@@ -144,7 +154,7 @@ export function IntakeForm({ kind = 'ballot' }: { kind?: 'ballot' | 'host' | 'ta
     {kind === 'ballot' && <label><span className="field-label">Bringing a plus-one? <span className="text-muted-foreground">/ optional — their email (included free)</span></span><input className="text-field" name="partnerEmail" type="email" placeholder="they@somewhere.com" maxLength={255} /><span className="field-hint">Every paid ticket is for 1 pax and automatically includes a plus-one — instant date night or bring a curious friend. Leave their email if you want them on the coordinates drop too.</span></label>}
     {kind === 'ballot' ? <fieldset><legend className="field-label">Areas of curiosity <span className="text-muted-foreground">/ choose any</span></legend><div className="topic-grid">{topics.map(topic => <label className="topic-option" key={topic}><input type="checkbox" name="topics" value={topic} />{topic}<span className="topic-help" tabIndex={0} aria-label={`${topic}: ${topicNotes[topic]}`} onClick={e => e.preventDefault()}><span className="topic-help-mark" aria-hidden="true">?</span><span className="topic-help-tip" role="tooltip">{topicNotes[topic]}</span></span></label>)}</div></fieldset> : <label><span className="field-label">{kind === 'host' ? 'Your space in Singapore' : 'Your thesis'}</span><textarea name="details" className="text-field" rows={5} maxLength={2000} required placeholder={kind === 'host' ? 'The space, the neighbourhood, and what makes it unusual.' : "The idea you can't stop thinking about. Why does it matter?"} /></label>}
     {error && <p className="form-error" role="alert">{error}</p>}
-    <Button variant="ballot" type="submit" disabled={pending}>{pending ? 'Submitting…' : kind === 'ballot' ? 'Enter the Ballot' : 'Send proposal'}<ArrowRight /></Button>
-    <p className="privacy-note">{kind === 'ballot' ? 'A ballot, not a booking. No guaranteed seat. No noise in your inbox.' : 'Your details stay private. We only use them to respond to your proposal.'}</p>
+    <Button variant="ballot" type="submit" disabled={pending}>{pending ? 'Submitting…' : kind === 'ballot' ? 'Save your seat' : 'Send proposal'}<ArrowRight /></Button>
+    <p className="privacy-note">{kind === 'ballot' ? 'A booking, first come first served. 25 seats only. Please cancel if you cannot come.' : 'Your details stay private. We only use them to respond to your proposal.'}</p>
   </form>;
 }

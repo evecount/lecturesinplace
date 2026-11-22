@@ -81,7 +81,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { title: "Lectures in Place" },
       { name: "description", content: "20-minute unannounced talks in secret urban spaces in Singapore." },
       { property: "og:title", content: "Lectures in Place" },
-      { property: "og:description", content: "Dense ideas in unusual rooms. 25 seats. Enter the ballot." },
+      { property: "og:description", content: "Dense ideas in unusual rooms. 25 seats. First come, first served." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
