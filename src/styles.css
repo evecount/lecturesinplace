@@ -264,6 +264,7 @@ html { scroll-behavior: smooth; scroll-padding-top: 35px; }
 .venue-tile figure { margin: 0; }
 .venue-tile img { aspect-ratio: 4 / 3; width: 100%; object-fit: cover; mix-blend-mode: multiply; border: 1px solid var(--border); background: var(--card); display: block; }
 .venue-tile figcaption { margin-top: 8px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted-foreground); }
+.editorial-highlight { background: var(--primary); color: var(--primary-foreground); padding: 3px 8px; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
 @media (max-width: 1000px) {
   .venue-strip { grid-template-columns: repeat(2, 1fr); gap: 14px; }
 }
