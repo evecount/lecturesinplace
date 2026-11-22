@@ -6,7 +6,6 @@ import { intakeSchema, topics, topicNotes } from '@/lib/intake-schema';
 const GOOGLE_FORM_URL =
   'https://docs.google.com/forms/d/e/1FAIpQLScPKrGavytgGNIQTEWRYt0D2WpGSZsqxRg0N3aaOcx5oXrOgQ/formResponse';
 const STRIPE_STANDARD_URL = 'https://buy.stripe.com/8x2cN6d5jeC44tM1SOefC00';
-const STRIPE_PWYC_URL = 'https://buy.stripe.com/5kQcN62qFgKc1hAbtoefC01';
 const STRIPE_FREE_URL = 'https://buy.stripe.com/5kQ28s5CRgKc9O6550efC03';
 
 export function IntakeForm({ kind = 'ballot' }: { kind?: 'ballot' | 'host' | 'talk' | 'team' }) {
@@ -116,15 +115,6 @@ export function IntakeForm({ kind = 'ballot' }: { kind?: 'ballot' | 'host' | 'ta
                   2027 Standard — $24 (1 Pax + Plus-One) <ArrowRight />
                 </a>
               </Button>
-              <Button variant="editorial" asChild>
-                <a
-                  href={`${STRIPE_PWYC_URL}${submittedEmail ? `?prefilled_email=${encodeURIComponent(submittedEmail)}` : ''}`}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  2027 PWYC — $12 suggested (1 Person) <ArrowRight />
-                </a>
-              </Button>
             </div>
             <div className="mt-6 p-5 rounded-xl border border-border bg-card/80 flex flex-col sm:flex-row items-center gap-5">
               <img
@@ -140,7 +130,7 @@ export function IntakeForm({ kind = 'ballot' }: { kind?: 'ballot' | 'host' | 'ta
                   PayNow to <span className="mono">+65 8608 1377</span>
                 </p>
                 <p className="text-xs text-muted-foreground leading-relaxed">
-                  <strong>$24</strong> for 1 pax + automatic plus-one, or <strong>PWYC</strong> (suggested <strong>$12</strong>, 1 person only, no plus-one). Enter the amount in your bank app, write the <strong>event date &amp; your email</strong> in the comments, and send your <strong>name, email, phone, and payment screenshot</strong> to <a className="underline text-foreground" href="mailto:gwen@evecount.com">gwen@evecount.com</a> or WhatsApp <strong>+65 8608 1377</strong> so we can send the secret location 24h before. <em>No refunds 5 working days before the event.</em>
+                  <strong>$24</strong> for 1 pax + automatic plus-one. Enter the amount in your bank app, write the <strong>event date &amp; your email</strong> in the comments, and send your <strong>name, email, phone, and payment screenshot</strong> to <a className="underline text-foreground" href="mailto:gwen@evecount.com">gwen@evecount.com</a> or WhatsApp <strong>+65 8608 1377</strong> so we can send the secret location 24h before. <em>No refunds 5 working days before the event.</em>
                 </p>
               </div>
             </div>
